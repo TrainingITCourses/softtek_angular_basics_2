@@ -1,2 +1,8 @@
-<p>footer works!</p>
-{{ author }}
+<footer>
+  <nav>
+    <a [href]="author.homepage">©️ {{ year }} {{ author.name }}</a>
+    @if(cookiesAccepted) { 🍪 }@else {
+    <button (click)="onAcceptClick()">Accept Cookies</button>
+    }
+  </nav>
+</footer>

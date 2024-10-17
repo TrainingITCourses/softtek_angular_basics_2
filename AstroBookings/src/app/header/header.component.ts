@@ -5,12 +5,37 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   template: `
-    <p>
-      header works!
-    </p>
+    <header>
+      <nav>
+        {{ title }}
+        <span>
+          @for(item of menu; track item.link) {
+          <a [href]="item.link">{{ item.title }}</a>
+          }
+        </span>
+      </nav>
+    </header>
   `,
-  styles: ``
+  styles: ``,
 })
 export class HeaderComponent {
-
+  title = 'Astro Bookings';
+  menu = [
+    {
+      title: '🌌 Home',
+      link: '/',
+    },
+    {
+      title: '🔭 Bookings',
+      link: '/bookings',
+    },
+    {
+      title: 'ℹ️ About us',
+      link: '/about',
+    },
+    {
+      title: '🔐 Log In',
+      link: '/login',
+    },
+  ];
 }
