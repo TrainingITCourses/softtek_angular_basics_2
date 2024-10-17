@@ -1,18 +1,18 @@
-import { CurrencyPipe, DatePipe, JsonPipe, UpperCasePipe } from '@angular/common';
+import { CurrencyPipe, DatePipe, DecimalPipe, UpperCasePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { LaunchDto } from '../models/launch.dto';
 
 @Component({
   selector: 'lab-bookings',
   standalone: true,
-  imports: [JsonPipe, UpperCasePipe, CurrencyPipe, DatePipe],
+  imports: [UpperCasePipe, CurrencyPipe, DatePipe, DecimalPipe],
   template: `
     <article>
       <header>
         <h2>{{ launch.mission }} {{ launch.destination }}</h2>
         <div [class]="launch.status">
           <span>{{ launch.pricePerSeat | currency : 'USD' : 'symbol' : '1.0-0' }}</span>
-          <span>{{ launch.date | date : 'dd/MM/yyyy' }}</span>
+          <span>{{ launch.date | date : 'dd MMM yyyy' }}</span>
           <span>{{ launch.status | uppercase }}</span>
         </div>
       </header>
@@ -25,7 +25,27 @@ import { LaunchDto } from '../models/launch.dto';
       </footer>
     </article>
   `,
-  styles: ``,
+  styles: `
+  .scheduled {
+      color: violet;
+      font-style: italic;
+    }
+    .confirmed {
+      color: green;
+    }
+    .delayed {
+      color: limegreen;
+      font-style: italic;
+    }
+    .launched {
+      color: orange;
+      font-style: italic;
+    }
+    .aborted {
+      color: red;
+      font-style: italic;
+    }
+  `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BookingsComponent {
@@ -34,10 +54,10 @@ export class BookingsComponent {
     agencyId: '1',
     rocketId: '1',
     date: new Date(),
-    mission: 'Mission',
-    destination: 'Destination',
-    pricePerSeat: 1000,
-    status: 'scheduled',
+    mission: 'Moon Landing',
+    destination: 'The Moon',
+    pricePerSeat: 1000000,
+    status: 'confirmed',
   };
 
   currentTravelers = 2;
