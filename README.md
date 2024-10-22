@@ -1,8 +1,6 @@
-# Softtek Angular Basics Edicion 2
+# Softtek Angular Basics Edición 2
 
 Curso de introducción a Angular moderno para Softtek. Edición2. Octubre 24
-
-
 
 > [Laboratorio de ejemplo](https://github.com/TrainingITCourses/softtek_angular_basics_2) del curso de [Angular Basics para Softtek Oct 24](https://cursos.trainingit.es/course/view.php?id=1761) impartido por [Alberto Basalo](https://albertobasalo.dev) con TrainingIT.
 
