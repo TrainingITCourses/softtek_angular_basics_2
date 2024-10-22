@@ -3,6 +3,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
+  effect,
   Signal,
   signal,
   WritableSignal,
@@ -48,8 +49,16 @@ import { LaunchTitlePipe } from './launch-title.pipe';
         </div>
       </header>
       <main>
-        <p>Travelers: {{ currentTravelers() }}</p>
-        <p>New travelers: {{ newTravelers() }}</p>
+        <p>Rocket Capacity: {{ rocket.capacity }}</p>
+        <p>Current Travelers: {{ currentTravelers() }}</p>
+        <label for="newTravelers">New Travelers:</label>
+        <input
+          id="newTravelers"
+          type="number"
+          min="0"
+          [max]="maxNewTravelers()"
+          [value]="newTravelers()"
+          (change)="onNewTravelersChange($event)" />
         <p>Total travelers: {{ totalTravelers() }}</p>
       </main>
       <footer>
@@ -81,9 +90,26 @@ export class BookingsComponent {
   currentTravelers: Signal<number> = signal(89);
   newTravelers: WritableSignal<number> = signal(0);
   totalTravelers: Signal<number> = computed(() => this.currentTravelers() + this.newTravelers());
+  maxNewTravelers: Signal<number> = computed(() => this.rocket.capacity - this.currentTravelers());
+
+  private readonly launchStatusEffect = effect(() => {
+    const occupation = this.totalTravelers() / this.rocket.capacity;
+    if (occupation > 0.9) {
+      this.launch.status = 'confirmed';
+    } else {
+      this.launch.status = 'delayed';
+    }
+  });
+
+  onNewTravelersChange(event: Event) {
+    const max = this.maxNewTravelers();
+    const newTravelers = (event.target as HTMLInputElement).valueAsNumber;
+    this.newTravelers.set(Math.min(newTravelers, max));
+    //console.log('New travelers:', this.newTravelers());
+  }
 
   onBookClick() {
-    this.newTravelers.update((v) => v + 1);
+    // this.newTravelers.update((v) => v + 1);
   }
 
   onCancelClick() {
