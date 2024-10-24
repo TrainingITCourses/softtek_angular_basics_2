@@ -65,10 +65,7 @@ export class BookingsComponent {
     () => {
       const occupation = this.totalTravelers() / this.rocket.capacity;
       if (occupation > 0.9) {
-        this.launch.update((launch) => {
-          launch.status = 'confirmed';
-          return launch;
-        });
+        this.launch.update((launch) => ({ ...launch, status: 'confirmed' }));
       } else {
         this.launch.update((launch) => ({ ...launch, status: 'scheduled' }));
       }
