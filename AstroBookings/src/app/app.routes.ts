@@ -14,7 +14,7 @@ export const routes: Routes = [
     loadComponent: () => import('./routes/login/login.page'),
   },
   {
-    path: 'launches/id/bookings',
-    loadComponent: () => import('./routes/bookings/bookings.component'),
+    path: 'launches/:id/bookings',
+    loadComponent: () => import('./routes/launches/bookings/bookings.page'),
   },
 ];

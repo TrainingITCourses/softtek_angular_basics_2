@@ -10,11 +10,11 @@ import { RouterLink } from '@angular/router';
       <nav>
         <a routerLink="">{{ title }}</a>
         <section>
-          @for (item of menu; track item.link) {
+          @for (item of menu; track item.link) { @if(!item.registeredOnly || isAuthenticated) {
           <span>
             <a [routerLink]="item.link">{{ item.title }}</a>
           </span>
-          }
+          }}
         </section>
       </nav>
     </header>
@@ -23,6 +23,7 @@ import { RouterLink } from '@angular/router';
 })
 export class HeaderComponent {
   title = 'Astro Bookings';
+  isAuthenticated = false;
   menu = [
     {
       title: '🌍 Home',
@@ -30,7 +31,8 @@ export class HeaderComponent {
     },
     {
       title: '🎟️ Bookings',
-      link: '/launches/id/bookings',
+      link: '/bookings',
+      registeredOnly: true,
     },
     {
       title: '📘 About us',

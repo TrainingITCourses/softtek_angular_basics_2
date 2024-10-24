@@ -8,8 +8,10 @@ import {
   WritableSignal,
 } from '@angular/core';
 
-import { LaunchDto } from '../../models/launch.dto';
-import { RocketDto } from '../../models/rocket.dto';
+import { ActivatedRoute } from '@angular/router';
+import LAUNCHES_DB from '../../../../db/launches.json';
+import { LaunchDto, NULL_LAUNCH } from '../../../models/launch.dto';
+import { RocketDto } from '../../../models/rocket.dto';
 import { BookFormComponent } from './book-form.component';
 import { LaunchHeaderComponent } from './launch-header.component';
 
@@ -32,18 +34,9 @@ import { LaunchHeaderComponent } from './launch-header.component';
     </article>
   `,
 })
-export default class BookingsComponent {
+export default class BookingsPage {
   // property data
-  launch: WritableSignal<LaunchDto> = signal<LaunchDto>({
-    id: 'lnch_1',
-    agencyId: 'usr_a1',
-    rocketId: 'rkt_1',
-    date: '2025-07-20T10:00:00Z',
-    mission: 'Artemis I',
-    destination: 'Moon Orbit',
-    pricePerSeat: 28000000,
-    status: 'delayed',
-  });
+  launch: WritableSignal<LaunchDto> = signal<LaunchDto>(NULL_LAUNCH);
   rocket: RocketDto = {
     id: 'rkt_1',
     agencyId: 'usr_a1',
@@ -76,6 +69,14 @@ export default class BookingsComponent {
       allowSignalWrites: true,
     },
   );
+
+  constructor(activateRoute: ActivatedRoute) {
+    const launchId: string = activateRoute.snapshot.params['id'] || '';
+    const launchFound = LAUNCHES_DB.find((launch) => launch.id === launchId);
+    if (launchFound) {
+      this.launch.set(launchFound);
+    }
+  }
 
   // Methods (event handlers)
   onBookTravel(newTravelers = 0) {

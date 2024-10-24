@@ -1,6 +1,6 @@
 import { CurrencyPipe, DatePipe, DecimalPipe, UpperCasePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, input, InputSignal } from '@angular/core';
-import { LaunchDto } from '../../models/launch.dto';
+import { LaunchDto } from '../../../models/launch.dto';
 import { LaunchTitlePipe } from './launch-title.pipe';
 
 /**
