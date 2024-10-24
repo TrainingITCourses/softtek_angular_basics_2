@@ -23,7 +23,7 @@ import { LaunchHeaderComponent } from './launch-header.component';
   imports: [LaunchHeaderComponent, BookFormComponent],
   template: `
     <article>
-      <lab-launch-header [launch]="launch" />
+      <lab-launch-header [launch]="launch()" />
       <lab-book-form
         [rocket]="rocket"
         [currentTravelers]="currentTravelers()"
@@ -33,7 +33,7 @@ import { LaunchHeaderComponent } from './launch-header.component';
 })
 export class BookingsComponent {
   // property data
-  launch: LaunchDto = {
+  launch: WritableSignal<LaunchDto> = signal<LaunchDto>({
     id: 'lnch_1',
     agencyId: 'usr_a1',
     rocketId: 'rkt_1',
@@ -42,7 +42,7 @@ export class BookingsComponent {
     destination: 'Moon Orbit',
     pricePerSeat: 28000000,
     status: 'delayed',
-  };
+  });
   rocket: RocketDto = {
     id: 'rkt_1',
     agencyId: 'usr_a1',
@@ -61,14 +61,23 @@ export class BookingsComponent {
   totalTravelers: Signal<number> = computed(() => this.currentTravelers() + this.newTravelers());
 
   // Effects (run on signals changes)
-  private readonly launchStatusEffect = effect(() => {
-    const occupation = this.totalTravelers() / this.rocket.capacity;
-    if (occupation > 0.9) {
-      this.launch.status = 'confirmed';
-    } else {
-      this.launch.status = 'delayed';
-    }
-  });
+  private readonly launchStatusEffect = effect(
+    () => {
+      const occupation = this.totalTravelers() / this.rocket.capacity;
+      if (occupation > 0.9) {
+        this.launch.update((launch) => {
+          launch.status = 'confirmed';
+          return launch;
+        });
+      } else {
+        this.launch.update((launch) => ({ ...launch, status: 'scheduled' }));
+      }
+      console.log('Launch status:', this.launch().status);
+    },
+    {
+      allowSignalWrites: true,
+    },
+  );
 
   // Methods (event handlers)
   onBookTravel(newTravelers = 0) {

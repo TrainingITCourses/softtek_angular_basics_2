@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "chrome": "start chrome -incognito -auto-open-devtools-for-tabs http://localhost:4201",
-    "start": "npm run chrome && ng serve --port 4201",
+    "chrome": "start chrome -incognito -auto-open-devtools-for-tabs http://localhost:4218",
+    "start": "npm run chrome && ng serve --port 4218",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",

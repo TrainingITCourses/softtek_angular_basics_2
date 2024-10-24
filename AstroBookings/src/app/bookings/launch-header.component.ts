@@ -1,5 +1,5 @@
 import { CurrencyPipe, DatePipe, DecimalPipe, UpperCasePipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, input, InputSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input, InputSignal } from '@angular/core';
 import { LaunchDto } from '../models/launch.dto';
 import { LaunchTitlePipe } from './launch-title.pipe';
 
@@ -16,7 +16,7 @@ import { LaunchTitlePipe } from './launch-title.pipe';
       <div [class]="launch().status">
         <span>{{ launch().pricePerSeat | currency : 'USD' : 'symbol' : '1.0-0' }}</span>
         <span>{{ launch().date | date : 'dd MMM yyyy' }}</span>
-        <span>{{ launch().status | uppercase }}</span>
+        <span>{{ launchStatus() | uppercase }}</span>
       </div>
     </header>
   `,
@@ -44,4 +44,6 @@ import { LaunchTitlePipe } from './launch-title.pipe';
 export class LaunchHeaderComponent {
   // Input signals (sent from parent via [input])
   launch: InputSignal<LaunchDto> = input.required<LaunchDto>();
+
+  launchStatus = computed(() => this.launch().status);
 }
