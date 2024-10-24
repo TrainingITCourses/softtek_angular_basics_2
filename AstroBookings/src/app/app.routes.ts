@@ -1,13 +1,20 @@
 import { Routes } from '@angular/router';
-import { BookingsComponent } from './bookings/bookings.component';
 
 export const routes: Routes = [
   {
     path: '',
-    component: undefined,
+    loadComponent: () => import('./routes/home/home.page'),
+  },
+  {
+    path: 'about',
+    loadComponent: () => import('./routes/about/about.page'),
+  },
+  {
+    path: 'login',
+    loadComponent: () => import('./routes/login/login.page'),
   },
   {
     path: 'launches/id/bookings',
-    component: BookingsComponent,
+    loadComponent: () => import('./routes/bookings/bookings.component'),
   },
 ];

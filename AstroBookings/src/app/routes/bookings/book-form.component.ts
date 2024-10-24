@@ -9,7 +9,7 @@ import {
   Signal,
   WritableSignal,
 } from '@angular/core';
-import { RocketDto } from '../models/rocket.dto';
+import { RocketDto } from '../../models/rocket.dto';
 
 /**
  * Booking form component

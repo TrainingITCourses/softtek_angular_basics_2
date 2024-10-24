@@ -7,8 +7,9 @@ import {
   signal,
   WritableSignal,
 } from '@angular/core';
-import { LaunchDto } from '../models/launch.dto';
-import { RocketDto } from '../models/rocket.dto';
+
+import { LaunchDto } from '../../models/launch.dto';
+import { RocketDto } from '../../models/rocket.dto';
 import { BookFormComponent } from './book-form.component';
 import { LaunchHeaderComponent } from './launch-header.component';
 
@@ -31,7 +32,7 @@ import { LaunchHeaderComponent } from './launch-header.component';
     </article>
   `,
 })
-export class BookingsComponent {
+export default class BookingsComponent {
   // property data
   launch: WritableSignal<LaunchDto> = signal<LaunchDto>({
     id: 'lnch_1',

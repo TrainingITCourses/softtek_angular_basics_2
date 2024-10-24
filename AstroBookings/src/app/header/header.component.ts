@@ -1,17 +1,18 @@
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'lab-header',
   standalone: true,
-  imports: [],
+  imports: [RouterLink],
   template: `
     <header>
       <nav>
-        <a href="">{{ title }}</a>
+        <a routerLink="">{{ title }}</a>
         <section>
           @for (item of menu; track item.link) {
           <span>
-            <a [href]="item.link">{{ item.title }}</a>
+            <a [routerLink]="item.link">{{ item.title }}</a>
           </span>
           }
         </section>
