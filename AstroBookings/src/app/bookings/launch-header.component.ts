@@ -3,6 +3,9 @@ import { ChangeDetectionStrategy, Component, input, InputSignal } from '@angular
 import { LaunchDto } from '../models/launch.dto';
 import { LaunchTitlePipe } from './launch-title.pipe';
 
+/**
+ * Header component for the launch details
+ */
 @Component({
   selector: 'lab-launch-header',
   standalone: true,

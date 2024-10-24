@@ -11,6 +11,10 @@ import {
 } from '@angular/core';
 import { RocketDto } from '../models/rocket.dto';
 
+/**
+ * Booking form component
+ * Display the booking form and the total travelers
+ */
 @Component({
   selector: 'lab-book-form',
   standalone: true,

@@ -12,12 +12,15 @@ import { RocketDto } from '../models/rocket.dto';
 import { BookFormComponent } from './book-form.component';
 import { LaunchHeaderComponent } from './launch-header.component';
 
+/**
+ * Bookings page componente
+ * Display the launch details and the booking form
+ */
 @Component({
   selector: 'lab-bookings',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [LaunchHeaderComponent, BookFormComponent],
-  styles: ``,
   template: `
     <article>
       <lab-launch-header [launch]="launch" />
@@ -29,7 +32,7 @@ import { LaunchHeaderComponent } from './launch-header.component';
   `,
 })
 export class BookingsComponent {
-  launch: LaunchDto = {
+  public launch: LaunchDto = {
     id: 'lnch_1',
     agencyId: 'usr_a1',
     rocketId: 'rkt_1',
@@ -39,7 +42,7 @@ export class BookingsComponent {
     pricePerSeat: 28000000,
     status: 'delayed',
   };
-  rocket: RocketDto = {
+  public rocket: RocketDto = {
     id: 'rkt_1',
     agencyId: 'usr_a1',
     name: 'Falcon Heavy',
@@ -47,9 +50,11 @@ export class BookingsComponent {
     range: 'mars',
   };
 
-  currentTravelers: Signal<number> = signal(89);
-  newTravelers: WritableSignal<number> = signal(0);
-  totalTravelers: Signal<number> = computed(() => this.currentTravelers() + this.newTravelers());
+  public currentTravelers: Signal<number> = signal(89);
+  private newTravelers: WritableSignal<number> = signal(0);
+  private totalTravelers: Signal<number> = computed(
+    () => this.currentTravelers() + this.newTravelers(),
+  );
 
   private readonly launchStatusEffect = effect(() => {
     const occupation = this.totalTravelers() / this.rocket.capacity;
@@ -60,7 +65,8 @@ export class BookingsComponent {
     }
   });
 
-  onBookTravel(newTravelers = 0) {
+  public onBookTravel(newTravelers = 0) {
     console.log('Booked travelers:', newTravelers);
+    this.newTravelers.set(newTravelers);
   }
 }
