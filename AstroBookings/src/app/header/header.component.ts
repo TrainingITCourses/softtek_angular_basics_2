@@ -7,12 +7,14 @@ import { Component } from '@angular/core';
   template: `
     <header>
       <nav>
-        {{ title }}
-        <span>
-          @for(item of menu; track item.link) {
-          <a [href]="item.link">{{ item.title }}</a>
+        <a href="">{{ title }}</a>
+        <section>
+          @for (item of menu; track item.link) {
+          <span>
+            <a [href]="item.link">{{ item.title }}</a>
+          </span>
           }
-        </span>
+        </section>
       </nav>
     </header>
   `,
@@ -22,15 +24,15 @@ export class HeaderComponent {
   title = 'Astro Bookings';
   menu = [
     {
-      title: '🌌 Home',
+      title: '🌍 Home',
       link: '/',
     },
     {
-      title: '🔭 Bookings',
-      link: '/bookings',
+      title: '🎟️ Bookings',
+      link: '/launches/:id/bookings',
     },
     {
-      title: 'ℹ️ About us',
+      title: '📘 About us',
       link: '/about',
     },
     {
