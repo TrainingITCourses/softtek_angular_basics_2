@@ -29,7 +29,7 @@ export class HeaderComponent {
     },
     {
       title: '🎟️ Bookings',
-      link: '/launches/:id/bookings',
+      link: '/launches/id/bookings',
     },
     {
       title: '📘 About us',
