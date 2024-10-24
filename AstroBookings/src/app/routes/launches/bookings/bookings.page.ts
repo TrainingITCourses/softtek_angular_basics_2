@@ -10,8 +10,8 @@ import {
 
 import { ActivatedRoute } from '@angular/router';
 import LAUNCHES_DB from '../../../../db/launches.json';
-import { LaunchDto, NULL_LAUNCH } from '../../../models/launch.dto';
-import { RocketDto } from '../../../models/rocket.dto';
+import { LaunchDto, NULL_LAUNCH } from '../../../shared/models/launch.dto';
+import { RocketDto } from '../../../shared/models/rocket.dto';
 import { BookFormComponent } from './book-form.component';
 import { LaunchHeaderComponent } from './launch-header.component';
 
